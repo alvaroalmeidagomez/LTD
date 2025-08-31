@@ -51,6 +51,12 @@ net_1 = train(net_1,theta,R);
 
 R_fnn=net_1(theta_new);
 
+%%%%%%%%%%%Cubic spline interpolation%%%%%%%%%%%
+
+R_inter = spline(theta,R,theta_new);
+
+
+
 %%%%%%%%%%% End %%%%%%%%%%%
 
 figure
@@ -71,9 +77,17 @@ colormap(hot); colorbar
 xlabel('\theta'); ylabel('x\prime')
 title("Sinogram from the feedforward neural network")
 
+figure
+imagesc(theta_new,xp,R_inter) 
+colormap(hot); colorbar
+xlabel('\theta'); ylabel('x\prime')
+title("Sinogram from the cubic spline interpolation")
+
+
 Reconstruction_train=iradon(R,theta);
 Reconstruction_learned=iradon(R_new,theta_new);
 Reconstruction_fnn=iradon(R_fnn,theta_new);
+Reconstruction_inter=iradon(R_inter,theta_new);
 
 
 figure
@@ -93,6 +107,10 @@ figure
 imshow(Reconstruction_fnn,[])
 title("Feedforward neural network")
 
+figure
+imshow(Reconstruction_inter,[])
+title("Cubic spline interpolation")
+
 
 
 [R_original,xp] = radon(P,1:0.25:180);
@@ -102,7 +120,10 @@ R_original=iradon(R_original,1:0.25:180);
  v_temp1=norm(Reconstruction_train-R_original,"fro");
  v_temp2=norm(Reconstruction_learned-R_original,"fro");
  v_temp3=norm(Reconstruction_fnn-R_original,"fro");
+ v_temp4=norm(Reconstruction_inter-R_original,"fro");
  
-output_display = ['The MSE on the training dataset is ',num2str(v_temp1),', the MSE obtained using the learning approach is ',num2str(v_temp2),', the MSE obtained using the feedforward neural network is ' ,num2str(v_temp3),];
+ 
+ 
+output_display = ['The MSE on the training dataset is ',num2str(v_temp1),', the MSE obtained using the learning approach is ',num2str(v_temp2),', the MSE obtained using the feedforward neural network is ' ,num2str(v_temp3), ', the MSE obtained using the cubic spline interpolation is ' ,num2str(v_temp4),];
  
 disp(output_display)
