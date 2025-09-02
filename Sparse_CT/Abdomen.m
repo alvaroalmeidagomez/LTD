@@ -123,7 +123,9 @@ R_original=iradon(R_original,1:0.25:180);
  v_temp4=norm(Reconstruction_inter-R_original,"fro");
  
  
+
  
-output_display = ['The MSE on the training dataset is ',num2str(v_temp1),', the MSE obtained using the learning approach is ',num2str(v_temp2),', the MSE obtained using the feedforward neural network is ' ,num2str(v_temp3), ', the MSE obtained using the cubic spline interpolation is ' ,num2str(v_temp4),];
+ 
+output_display = ['The squared error on the training dataset is ',num2str(v_temp1),' , the squared error obtained using the learning approach is ',num2str(v_temp2),', the squared error obtained using the feedforward neural network is ' ,num2str(v_temp3), ', the squared error obtained using the cubic spline interpolation is ' ,num2str(v_temp4),];
  
 disp(output_display)
