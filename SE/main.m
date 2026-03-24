@@ -1,13 +1,17 @@
 clear all
 close all
 clc
-disp('####Learning through Diffusion####');
-disp('####Learning Over the Logarithmic Spiral####');
+disp(' ')
+disp('==============================================')
+disp(' Project supported by the Centro de Modelamiento Matematico (Chile)')
+disp(' Interpolating over the Logarithmic Spiral')
+disp('==============================================')
+disp(' ')
 
 
-m     = input('Enter the number of training points on the logarithmic spiral: ');
-m_new = input('Enter the number of generated points to be trained on the cube: ');
-m_new2= input('Enter the number of generated points to be trained on the spiral: ');
+m      = input('Enter the number of input points on the logarithmic spiral: ');
+m_new  = input('Enter the number of interpolation points on the cube: ');
+m_new2 = input('Enter the number of interpolation points on the spiral: ');
 
 
 % Create dataset
@@ -27,7 +31,7 @@ for i=1:m_new
     var_temp=transpose(D-xtemp);
     var_temp=vecnorm(var_temp);
     [mivar , I]=min(var_temp);
-    epsilon=-mivar/log(0.1);
+    epsilon=mivar;
    
    if mivar==0
     sol(i)=f(I);
@@ -73,7 +77,7 @@ figure
 scatter(D(:,1),D(:,2),40,f,'filled')
 hold on
 scatter(D_new(:,1),D_new(:,2),5,sol,'filled')
-title('Function learned through the proposed methodology')
+title('Interpolation through the proposed methodology')
 xlabel('First coordinate') 
 ylabel('Second coordinate') 
 c=colorbar;
@@ -85,7 +89,7 @@ figure
 scatter(D(:,1),D(:,2),40,f,'filled')
 hold on
 scatter(D_new(:,1),D_new(:,2),5,f_fnn,'filled')
-title('Function learned through the feedfoward neural network')
+title('Interpolation through the feedfoward neural network')
 xlabel('First coordinate') 
 ylabel('Second coordinate') 
 c=colorbar;
@@ -140,7 +144,7 @@ f_fnn2=net_1(transpose(D_new2));
 
 figure
 scatter(D_new2(:,1),D_new2(:,2),40,sol2,'filled')
-title('Function learned through the proposed methodology')
+title('Interpolation through the proposed methodology')
 xlabel('First coordinate') 
 ylabel('Second coordinate') 
 c=colorbar;
@@ -150,7 +154,7 @@ ylim([-exp(1) exp(1)])
 
 figure
 scatter(D_new2(:,1),D_new2(:,2),40,f_fnn2,'filled')
-title('Function learned through the feedfoward neural network')
+title('Interpolation through the feedfoward neural network')
 xlabel('First coordinate') 
 ylabel('Second coordinate') 
 c=colorbar;
