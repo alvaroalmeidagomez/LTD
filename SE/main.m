@@ -260,11 +260,7 @@ xlim([-exp(1) exp(1)])
 ylim([-exp(1) exp(1)])
 
 
-fx0=log(vecnorm(transpose(D_new)));
-v_temp10=norm(fx0-transpose(sol));
-v_temp20=norm(fx0-f_fnn);
-v_temp30=norm(fx0-transpose(f_GP));
-v_temp40=norm(fx0-f_RB);
+
 
 fx=log(vecnorm(transpose(D_new2)));
 v_temp1=norm(fx-transpose(sol2));
@@ -282,12 +278,6 @@ disp('==============================================')
 disp('Computational results on the cube')
 disp('==============================================')
 
-output_display0 = sprintf(['Squared Error Results:\n', ...
-    '  - Proposed Methodology:         %.4f\n', ...
-    '  - Feedforward Neural Network:   %.4f\n', ...
-    '  - Gaussian Process Regression:  %.4f\n', ...
-    '  - Radial Basis Function:        %.4f'], ...
-    v_temp10, v_temp20, v_temp30, v_temp40);
 
 
 output_display_time0 = sprintf(['Computational time (seconds)::\n', ...
@@ -298,10 +288,6 @@ output_display_time0 = sprintf(['Computational time (seconds)::\n', ...
     Tempvar1, Tempvar2, Tempvar3, Tempvar4);
 
 
-
-disp(output_display0)
-disp('==============================================')
-disp('==============================================')
 
 disp(output_display_time0)
 
