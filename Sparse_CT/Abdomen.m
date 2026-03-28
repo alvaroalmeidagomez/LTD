@@ -23,7 +23,7 @@ filename_char = 'Abdomen.png';
 P = imread(filename_char);
 if size(P,3) > 1, P = rgb2gray(P); end
 P = imresize(im2double(P), [256 256]);
-P=P0;
+P0=P;
 sz = size(P, 1); % Store original size (256)
 P = P + 0.2 * rand(256);
 
