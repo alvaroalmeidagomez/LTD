@@ -23,6 +23,7 @@ filename_char = 'Abdomen.png';
 P = imread(filename_char);
 if size(P,3) > 1, P = rgb2gray(P); end
 P = imresize(im2double(P), [256 256]);
+P=P0;
 sz = size(P, 1); % Store original size (256)
 P = P + 0.2 * rand(256);
 
@@ -105,7 +106,7 @@ rec_rbf    = iradon(R_rbf, theta_learn, 'linear', 'Ram-Lak', 1, sz);
 %% ================= ERROR ANALYSIS =================
 disp('Calculating Frobenius norms...');
 theta_ref = 0:1:179;
-[R_ref, ~] = radon(P, theta_ref);
+[R_ref, ~] = radon(P0, theta_ref);
 img_ref = iradon(R_ref, theta_ref, 'linear', 'Ram-Lak', 1, sz);
 
 err_train  = norm(rec_train  - img_ref, 'fro');
